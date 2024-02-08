@@ -1,14 +1,9 @@
-var ctd = new List<string>();
-                for (int c = 0, loopTo = DT.Columns.Count - 1; c <= loopTo; c++)
-                {
-                    string cn = DT.Columns[c].ColumnName;
-                    if (cn.Contains("reference"))
-                    {
-                        ctd.Add(cn);
-                    }
-                }
-
-                foreach (string cn in ctd)
-                    DT.Columns.Remove(cn);
-
-                return DT;
+static List<List<string>> SplitListIntoChunks(List<string> list, int chunkSize)
+{
+    List<List<string>> chunks = new List<List<string>>();
+    for (int i = 0; i < list.Count; i += chunkSize)
+    {
+        chunks.Add(list.GetRange(i, Math.Min(chunkSize, list.Count - i)));
+    }
+    return chunks;
+}
